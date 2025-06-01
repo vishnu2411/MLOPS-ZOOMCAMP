@@ -1,0 +1,15 @@
+version: 1
+deployments:
+  - name: nyc-taxi-monthly
+    flow_name: scheduled_nyc_taxi_pipeline
+    entrypoint: scheduled_nyc_taxi_pipeline.py:scheduled_nyc_taxi_pipeline
+    parameters: {}
+    schedule:
+      cron: "0 0 1 * *"  # Runs at midnight on the 1st of every month
+    storage:
+      type: local
+      path: ./  # Adjust based on where your project is stored
+    infrastructure:
+      type: process
+      env:
+        PREFECT_LOGGING_LEVEL: INFO
